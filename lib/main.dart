@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'screens/dashboard_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -9,17 +10,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Gym Tracker',
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const Scaffold(
-        body: Center(
-          child: Text(
-            'Gym Tracker App',
-            style: TextStyle(fontSize: 24),
-          ),
-        ),
-      ),
+      home: DashboardScreen(),
     );
   }
 }
