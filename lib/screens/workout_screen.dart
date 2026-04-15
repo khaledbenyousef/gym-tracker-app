@@ -12,7 +12,11 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
 
   void addExercise() {
     setState(() {
-      exercises.add({'name': 'New Exercise', 'sets': []});
+      exercises.add({
+        'name': 'New Exercise',
+        'sets': [],
+        'id': DateTime.now().toString(),
+      });
     });
   }
 
@@ -34,20 +38,36 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
             var exercise = entry.value;
 
             return Card(
+              key: ValueKey(exercise['id']),
               margin: const EdgeInsets.only(bottom: 12),
               child: Padding(
                 padding: const EdgeInsets.all(12),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      exercise['name'],
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Expanded(
+                          child: TextField(
+                            decoration: const InputDecoration(
+                              labelText: "Exercise Name",
+                            ),
+                            onChanged: (value) {
+                              exercise['name'] = value;
+                            },
+                          ),
+                        ),
+                        IconButton(
+                          onPressed: () {
+                            setState(() {
+                              exercises.removeAt(index);
+                            });
+                          },
+                          icon: const Icon(Icons.delete, color: Colors.red),
+                        ),
+                      ],
                     ),
-
                     const SizedBox(height: 10),
 
                     // Sets
