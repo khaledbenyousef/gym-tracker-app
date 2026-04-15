@@ -125,8 +125,22 @@ class _WorkoutScreenState extends State<WorkoutScreen> {
 
           ElevatedButton(
             onPressed: () {
-              // Save logic later
-              print(exercises);
+              if (exercises.isEmpty) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text("Add at least one exercise")),
+                );
+                return;
+              }
+
+              final workout = {
+                'date': DateTime.now().toString(),
+                'exercises': exercises,
+              };
+
+              print(workout);
+              setState(() {
+                exercises.clear();
+              });
             },
             child: const Text("Save Workout"),
           ),
